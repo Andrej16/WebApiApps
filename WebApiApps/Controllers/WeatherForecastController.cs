@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebApiApps.Controllers
 {
@@ -48,7 +47,7 @@ namespace WebApiApps.Controllers
             })
             .ToArray();
 
-            return Ok(new {Properties = list});
+            return Ok(new { Properties = list });
         }
 
         [HttpGet("Version")]
@@ -59,5 +58,16 @@ namespace WebApiApps.Controllers
         public IActionResult GetError() =>
             Problem("Something went wrong.");
 
+        [HttpGet("LoggingOverview")]
+        public ActionResult<IEnumerable<string>> LoggingOverview()
+        {
+            //Info level traces are not captured by default
+            _logger.LogInformation("An example of an Info trace..");
+
+            _logger.LogWarning("An example of a Warning trace..");
+            _logger.LogError("An example of an Error level message");
+
+            return new string[] { "value1", "value2" };
+        }
     }
 }
