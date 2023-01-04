@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebApiApps.Constants;
 
 namespace WebApiApps.Controllers
 {
@@ -65,7 +66,10 @@ namespace WebApiApps.Controllers
             _logger.LogInformation("An example of an Info trace..");
 
             _logger.LogWarning("An example of a Warning trace..");
+
             _logger.LogError("An example of an Error level message");
+
+            _logger.LogWarning(MyLogEvents.GenerateItems, "Warning specified an event ID");
 
             return new string[] { "value1", "value2" };
         }
